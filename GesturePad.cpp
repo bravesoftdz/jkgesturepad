@@ -267,7 +267,10 @@ void __fastcall TfrmGesturePad::Timer1Timer(TObject *Sender)
 
    Timer1->Enabled = false;
    Debug("Loading from config file: " + ConfigFile);
-   frmSettings->lstGestureCmds->Items->LoadFromFile(ConfigFile);
+   if (FileExists(ConfigFile)) {
+	   frmSettings->lstGestureCmds->Items->LoadFromFile(ConfigFile);
+   }
+
 }
 //---------------------------------------------------------------------------
 
