@@ -136,25 +136,7 @@ void __fastcall TfrmGesturePad::Debug(const String& s){
 
 void __fastcall TfrmGesturePad::FormCreate(TObject *Sender)
 {
-
-	//find User Dir ie. c:/Users/JimKinsman
-	if (UserDir.Length() == 0){
-
-				PWSTR user_dir = 0;
-				if (SUCCEEDED(SHGetKnownFolderPath(
-									FOLDERID_Profile,
-									0,
-									NULL,
-									&user_dir)))
-				{
-					   UserDir = String(user_dir);
-					   CoTaskMemFree(user_dir);
-				}
-		 ConfigFile = UserDir+"/JKGestureCmds.cfg";
-	 }else{
-         ConfigFile = ExtractFilePath(Application->ExeName)+"/JKGestureCmds.cfg";
-     }
-
+     UserDir = "";
 	 pointa.x = -1;
 	 vtemp = -1;
 	 sw = new TStopwatch();
@@ -180,11 +162,9 @@ void __fastcall TfrmGesturePad::TrayIcon1Click(TObject *Sender)
 
 void __fastcall TfrmGesturePad::FormPaint(TObject *Sender)
 {
-	ShowWindow(Application->Handle, SW_HIDE);
-	if (FileExists(ConfigFile)) {
-	   frmSettings->lstGestureCmds->Items->LoadFromFile(ConfigFile);
-   }
 	this->OnPaint = NULL;
+
+	ShowWindow(Application->Handle, SW_HIDE);
 }
 //---------------------------------------------------------------------------
 
@@ -256,6 +236,38 @@ void __fastcall TfrmGesturePad::FormClose(TObject *Sender, TCloseAction &Action)
 {
 	delete sw;
 	delete sw2;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmGesturePad::Timer1Timer(TObject *Sender)
+{
+	//find User Dir ie. c:/Users/JimKinsman
+	if (UserDir.Length() == 0){
+				PWSTR user_dir = 0;
+				if (SUCCEEDED(SHGetKnownFolderPath(
+									FOLDERID_Profile,
+									0,
+									NULL,
+									&user_dir)))
+				{
+					   UserDir = String(user_dir);
+					   CoTaskMemFree(user_dir);
+				}
+		 ConfigFile = UserDir+"\\JKGestureCmds.cfg";
+	 }else{
+		 ConfigFile = ExtractFilePath(Application->ExeName)+"\\JKGestureCmds.cfg";
+	 }
+	Debug(ConfigFile);
+	if (FileExists(ConfigFile)) {
+	   Debug(ConfigFile + " exists" );
+
+	}else{
+		Debug("Not exists");
+	}
+
+   Timer1->Enabled = false;
+   Debug("Loading from config file: " + ConfigFile);
+   frmSettings->lstGestureCmds->Items->LoadFromFile(ConfigFile);
 }
 //---------------------------------------------------------------------------
 

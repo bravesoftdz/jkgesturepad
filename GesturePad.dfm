@@ -6014,4 +6014,10 @@ object frmGesturePad: TfrmGesturePad
       OnClick = Exit1Click
     end
   end
+  object Timer1: TTimer
+    Interval = 300
+    OnTimer = Timer1Timer
+    Left = 176
+    Top = 160
+  end
 end

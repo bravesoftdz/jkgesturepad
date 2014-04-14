@@ -74,6 +74,7 @@ __published:	// IDE-managed Components
 	TAction *Action39;
 	TAction *Action40;
 	TAction *Action41;
+	TTimer *Timer1;
 	void __fastcall Debug(const String& s);
 	void __fastcall actGesture(TObject *Sender);
 	void __fastcall Settings1Click(TObject *Sender);
@@ -84,6 +85,7 @@ __published:	// IDE-managed Components
 	void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
 	void __fastcall FormMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+	void __fastcall Timer1Timer(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations
