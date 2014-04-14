@@ -13,6 +13,7 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 	{
 		Application->Initialize();
 		Application->MainFormOnTaskBar = true;
+		Application->Title = "JKGesturePad";
 		Application->CreateForm(__classid(TfrmGesturePad), &frmGesturePad);
 		Application->CreateForm(__classid(TfrmSettings), &frmSettings);
 		Application->Run();
