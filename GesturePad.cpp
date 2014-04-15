@@ -5,7 +5,11 @@
 
 #include "GesturePad.h"
 #include "Settings.h"
+
 #include <RegularExpressions.hpp>
+
+#pragma link "msvcrt.lib"
+
 #include <algorithm>
 
 //---------------------------------------------------------------------------
